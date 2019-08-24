@@ -11,7 +11,11 @@ class Tile
         self.state = :revealed
     end
 
-    def flag
-        self.state = :flagged
+    def toggle_flag
+        if state == :flagged
+            self.state = :hidden
+        elsif state == :hidden
+            self.state = :flagged
+        end
     end
 end

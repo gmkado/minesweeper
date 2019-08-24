@@ -1,4 +1,6 @@
 require_relative "tile"
+require "yaml"
+
 class Array
     def coordinates(element)
         each_with_index do |subarray, i|
@@ -103,8 +105,8 @@ class Board
         end
     end
 
-    def flag
-        tile_at_current_pose.flag
+    def toggle_flag
+        tile_at_current_pose.toggle_flag
     end
 
     def tile_at_current_pose
@@ -114,5 +116,7 @@ end
 
 if $PROGRAM_NAME == __FILE__
     board = Board.new
-    board.render
+    serialized_board = board.to_yaml
+    board2 = YAML::load(serialized_board)
+    board2.render
 end
